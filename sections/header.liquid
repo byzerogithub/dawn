@@ -153,6 +153,7 @@
               {% render 'icon-close' %}
             </span>
           </summary>
+
           <div id="menu-drawer" class="gradient menu-drawer motion-reduce" tabindex="-1">
             <div class="menu-drawer__inner-container">
               <div class="menu-drawer__navigation-container">
@@ -219,6 +220,7 @@
                     {%- endfor -%}
                   </ul>
                 </nav>
+
                 <div class="menu-drawer__utility-links">
                   {%- if shop.customer_accounts_enabled -%}
                     <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide">
@@ -417,6 +419,7 @@
                   <use href="#icon-close">
                 </svg>
               </button>
+
             </div>
           </div>
         </details>
@@ -721,6 +724,25 @@
           </div>
         {%- endif -%}
       </a>
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+        {%- liquid
+          if cart == empty
+            render 'icon-cart-empty'
+          else
+            render 'icon-cart'
+          endif
+        -%}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+      <h1>Hello</h1>
     </div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
